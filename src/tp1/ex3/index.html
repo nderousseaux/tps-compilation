@@ -1,0 +1,24 @@
+<html><body>
+<style>
+.kw { font-weight: bold; }
+.str { color: green; }
+.comment { color: red; }
+.prepro { color: purple; }
+</style><pre>
+#include &lt;fifo.h&gt;
+#define NVOISINS 8
+<span class="kw">for </span>(x = 0; x &lt; N; x++) {
+  <span class="kw">if </span>(M[x] != 0)                   <span class="comment">/* le pixel appartient a un maximum */</span>
+    {
+    <span class="kw">for </span>(k = 0; k &lt; NVOISINS; k += 1) <span class="comment">/* parcourt les voisins */</span>
+      {                              <span class="comment">/* si un voisin n'est pas dans la FIFO */</span>
+      y = voisin(x, k, rs, N);     <span class="comment">/* et pas maximum, on le met en FIFO */</span>
+      <span class="kw">if </span>((y != -1) &amp;&amp; (! IsSet(y, EN_FIFO)) &amp;&amp; (M[y] == 0)) {
+        FifoPush(FIFO, y);
+        Set(y, EN_FIFO);
+        <span class="kw">if </span>(trace) printf(<span class="str">"empile point %d (%d,%d)\n"</span>, y, y%rs, y/rs);
+        } <span class="comment">/* if y ... */</span>
+      } <span class="comment">/* for k */</span>
+    } <span class="comment">/* if M */</span>
+} <span class="comment">/* for x */</span>
+</pre></body></html>
